@@ -5,23 +5,26 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import './App.css';
 import { UserAuthContextProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { SnackbarProvider } from 'notistack';
 
 function App() {
 
   return (
     <>
       <UserAuthContextProvider>
-        <BrowserRouter>
+        <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
+          <BrowserRouter>
             <Routes>
               <Route path='/' element={<LandingPage />} />
               <Route path='/dashboard' element={
                 <ProtectedRoute>
                   <Dashboard />
                 </ProtectedRoute>
-              } 
+              }
               />
             </Routes>
           </BrowserRouter>
+        </SnackbarProvider>
       </UserAuthContextProvider>
     </>
   );
